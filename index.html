@@ -1,0 +1,1225 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+</head>
+<body>
+<title>MAPS 訪談整理</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+/* Layout: a MAPS flipchart drawn in SVG with real buttons laid over each region; each opens a zoomed "slide". A one-column text version follows for screen readers. */
+:root {
+  --scale: 1;
+  --bg: #EDF2F1;
+  --paper: #FFFFFF;
+  --surface: #FFFFFF;
+  --fg: #16211F;
+  --muted: #3E4B49;
+  --line: #C3CFCD;
+  --ink: #0F8577;
+  --accent: #0B6B60;
+  --on-accent: #FFFFFF;
+  --tint: #DCF1ED;
+  --circle: #8F8A86;
+  --earth: #3A3F3E;
+  --pin: #9AA5A3;
+  --quote: #EEF4F3;
+  --focus: #C2410C;
+  --badge-fg: #FFFFFF;
+  --shadow: rgba(11, 59, 54, .16);
+  --sky-top: #D9EEF5; --sky-bottom: #F4FAFB; --ground: #E8F1DC; --grass: #8DB46B;
+  /* 機場主題：護照、飛機、鴿子、行李箱、跑道、航班看板、塔台 */
+  --story-s: #8E2F45; --story-f: #FFF6EA;
+  --dream-s: #2F5FC4; --dream-f: #EEF3FF;
+  --nightmare-s: #5B5577; --nightmare-f: #ECEAF2;
+  --plan-s: #1E2B35; --plan-f: #24323D;
+  --needs-s: #3F5560; --needs-f: #DCE3E7;
+  --contribution-s: #9A5B13; --contribution-f: #FBE5C6;
+  --reactions-s: #A63D6E; --reactions-f: #FCEDF4;
+  --board-fg: #F2F5F7; --board-muted: #B8C4CC; --board-hi: #FFD54A; --board-ink: #1E2B35; --board-line: rgba(242, 245, 247, .22);
+  --mark: #FFFFFF; --tower: #6B7B86; --pigeon: #A7AFBA; --beak: #D98E2B;
+  --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --font-display: var(--font-body);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1211; --paper: #121B1A; --surface: #162120; --fg: #E7F0EE; --muted: #B2C2BF; --line: #2F3E3C;
+    --ink: #4CC3B3; --accent: #6FD6C7; --on-accent: #0B1211; --tint: #183A35; --circle: #A39D97;
+    --earth: #8F9C9A; --pin: #4A5856; --quote: #1A2826; --focus: #FF9A5C;
+    --badge-fg: #0B1211; --shadow: rgba(0, 0, 0, .45);
+    --sky-top: #0F2029; --sky-bottom: #13201F; --ground: #16221A; --grass: #4F7A3C;
+    --story-s: #F09AAE; --story-f: #2E2224;
+    --dream-s: #9DB5F5; --dream-f: #1D2740;
+    --nightmare-s: #C3BBE6; --nightmare-f: #26233A;
+    --plan-s: #9FB3C2; --plan-f: #0E161C;
+    --needs-s: #9FB4BE; --needs-f: #26323A;
+    --contribution-s: #F2B46B; --contribution-f: #3A2A16;
+    --reactions-s: #F08DBA; --reactions-f: #3A1F2C;
+    --mark: #C9D2D8; --tower: #8D9BA5; --pigeon: #7D8794; --beak: #E6A24A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1211; --paper: #121B1A; --surface: #162120; --fg: #E7F0EE; --muted: #B2C2BF; --line: #2F3E3C;
+  --ink: #4CC3B3; --accent: #6FD6C7; --on-accent: #0B1211; --tint: #183A35; --circle: #A39D97;
+  --earth: #8F9C9A; --pin: #4A5856; --quote: #1A2826; --focus: #FF9A5C;
+  --badge-fg: #0B1211; --shadow: rgba(0, 0, 0, .45);
+  --sky-top: #0F2029; --sky-bottom: #13201F; --ground: #16221A; --grass: #4F7A3C;
+  --story-s: #F09AAE; --story-f: #2E2224;
+  --dream-s: #9DB5F5; --dream-f: #1D2740;
+  --nightmare-s: #C3BBE6; --nightmare-f: #26233A;
+  --plan-s: #9FB3C2; --plan-f: #0E161C;
+  --needs-s: #9FB4BE; --needs-f: #26323A;
+  --contribution-s: #F2B46B; --contribution-f: #3A2A16;
+  --reactions-s: #F08DBA; --reactions-f: #3A1F2C;
+  --mark: #C9D2D8; --tower: #8D9BA5; --pigeon: #7D8794; --beak: #E6A24A;
+  color-scheme: dark;
+}
+/* 高對比：黑底黃字，放在最後以覆蓋淺色與深色主題 */
+:root[data-contrast="high"] {
+  --bg: #000000; --paper: #000000; --surface: #000000; --fg: #FFE600; --muted: #FFFFFF; --line: #FFE600;
+  --ink: #FFE600; --accent: #FFE600; --on-accent: #000000; --tint: #2A2600; --circle: #FFFFFF;
+  --earth: #FFFFFF; --pin: #FFFFFF; --quote: #141414; --focus: #00E5FF;
+  --badge-fg: #000000; --shadow: transparent;
+  --sky-top: #000000; --sky-bottom: #000000; --ground: #000000; --grass: #FFFFFF;
+  --story-s: #FFE600; --story-f: #000000; --dream-s: #FFE600; --dream-f: #000000;
+  --nightmare-s: #FFE600; --nightmare-f: #000000; --plan-s: #FFE600; --plan-f: #000000;
+  --needs-s: #FFE600; --needs-f: #000000; --contribution-s: #FFE600; --contribution-f: #000000;
+  --reactions-s: #FFE600; --reactions-f: #000000;
+  --board-fg: #FFE600; --board-muted: #FFFFFF; --board-hi: #FFE600; --board-ink: #000000; --board-line: #FFE600;
+  --mark: #FFFFFF; --tower: #FFFFFF; --pigeon: #000000; --beak: #FFE600;
+  --font-display: var(--font-body);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { font-size: calc(112.5% * var(--scale)); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+:focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
+
+.skip {
+  position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); top: -10rem;
+  background: var(--accent); color: var(--on-accent);
+  padding: .75rem 1rem; border-radius: 8px; font-weight: 700; z-index: 20;
+}
+.skip:focus { top: calc(env(safe-area-inset-top, 0px) + 12px); }
+
+.page {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-block: 1rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: 1rem;
+}
+.page > * { min-width: 0; }
+.narrow { max-width: 46rem; }
+
+/* 標頭 */
+.masthead { display: grid; gap: .4rem; }
+.eyebrow { margin: 0; font-size: .85rem; font-weight: 500; color: var(--muted); letter-spacing: .06em; }
+h1 { margin: 0; font-family: var(--font-display); font-size: 1.9rem; line-height: 1.3; text-wrap: balance; }
+.demo-note { margin: 0; padding: .75rem 1rem; border-radius: 8px; background: var(--tint); font-size: .95rem; }
+.meta { margin: 0; display: grid; gap: .25rem; font-size: .95rem; }
+.meta div { display: flex; flex-wrap: wrap; gap: 0 .5rem; }
+.meta dt { font-weight: 700; }
+.meta dd { margin: 0; min-width: 0; }
+
+.tool-row { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.tool-label { font-weight: 700; margin-right: .25rem; }
+.tool-btn {
+  min-height: 48px; padding: .5rem 1rem;
+  font: inherit; font-size: .95rem; font-weight: 500;
+  color: var(--accent); background: var(--surface);
+  border: 2px solid var(--accent); border-radius: 8px; cursor: pointer;
+}
+.tool-btn:hover { background: var(--tint); }
+.tool-btn[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+
+/* MAPS 地圖 */
+.map-scroll { overflow-x: auto; padding-bottom: .25rem; }
+/* 地圖大小跟著螢幕高度，一頁就看得完；--chrome 是標題和標籤佔掉的高度 */
+.board {
+  position: relative;
+  width: calc(min(100%, (100vh - var(--chrome, 10rem)) * 880 / 670) * var(--scale));
+  width: calc(min(100%, (100dvh - var(--chrome, 10rem)) * 880 / 670) * var(--scale));
+  min-width: calc(540px * var(--scale));
+  margin-inline: auto;
+  aspect-ratio: 880 / 670;
+  container-type: inline-size;
+}
+.map-stage:not(.is-full) .board,
+.map-stage:not(.is-full) .board .region,
+.map-stage:not(.is-full) .drawing [data-r] { cursor: zoom-in; }
+
+/* 全螢幕地圖 */
+.exit-full { display: none; }
+.map-stage.is-full {
+  position: fixed; inset: 0; z-index: 50;
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  padding: max(10px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px))
+           max(10px, env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
+  background: var(--bg); overflow: auto;
+}
+.map-stage.is-full .exit-full { display: inline-flex; align-items: center; align-self: flex-end; }
+.map-stage.is-full .map-scroll { width: 100%; overflow: visible; }
+.map-stage.is-full .board {
+  width: min(100%, calc((100vh - 5rem) * 880 / 670));
+  width: min(100%, calc((100dvh - 5rem) * 880 / 670));
+  min-width: 0;
+}
+.map-full-open, .map-full-open body { overflow: hidden; }
+
+/* 標題下方的標籤 */
+.tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .2rem; }
+.tab-btn {
+  min-height: 44px; padding: .35rem 1rem;
+  font: inherit; font-size: .95rem; font-weight: 500; color: var(--fg);
+  background: var(--surface); border: 2px solid var(--line); border-radius: 999px; cursor: pointer;
+}
+.tab-btn:hover { border-color: var(--ink); }
+.tab-btn[aria-expanded="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.full-open { margin-left: auto; border-color: var(--ink); color: var(--accent); }
+.tab-panels { display: grid; }
+.tab-panel {
+  display: grid; gap: 1rem; padding: 1rem 1.25rem 1.25rem;
+  background: var(--surface); border: 2px solid var(--line); border-radius: 12px;
+}
+.tab-panel > h2 { margin: 0; font-size: 1.1rem; }
+.edit-bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  display: none; flex-wrap: wrap; align-items: center; gap: .5rem 1rem;
+  padding: .6rem 1rem; border-radius: 10px; background: var(--accent); color: var(--on-accent);
+}
+.editing .edit-bar { display: flex; }
+.edit-bar p { margin: 0; margin-right: auto; font-weight: 500; }
+.drawing { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.paper { fill: var(--paper); stroke: var(--line); stroke-width: 2; }
+.pin { fill: var(--pin); }
+.shape {
+  --rs: var(--ink); --rf: var(--paper);
+  fill: var(--rf); stroke: var(--rs); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round;
+  transition: fill .15s, stroke-width .15s;
+}
+.shape[data-r="story"] { --rs: var(--story-s); --rf: var(--story-f); }
+.shape[data-r="dream"] { --rs: var(--dream-s); --rf: var(--dream-f); }
+.shape[data-r="nightmare"] { --rs: var(--nightmare-s); --rf: var(--nightmare-f); }
+.shape[data-r="plan"] { --rs: var(--plan-s); --rf: var(--plan-f); }
+.shape[data-r="needs"] { --rs: var(--needs-s); --rf: var(--needs-f); }
+.shape[data-r="contribution"] { --rs: var(--contribution-s); --rf: var(--contribution-f); }
+.shape[data-r="reactions"] { --rs: var(--reactions-s); --rf: var(--reactions-f); }
+.shape.hot { fill: color-mix(in srgb, var(--rf) 80%, var(--rs)); stroke-width: 4.5; }
+.shape[data-r="plan"].hot { stroke: var(--board-hi); }
+.soft { filter: url(#soft); }
+.drawing [data-r] { cursor: pointer; }
+.ground { fill: var(--ground); }
+.tuft { fill: none; stroke: var(--grass); stroke-width: 2.2; stroke-linecap: round; }
+/* 護照與登機證 */
+.cover { fill: var(--story-s); stroke: var(--story-s); stroke-width: 3; stroke-linejoin: round; }
+.stamp { fill: none; stroke: var(--story-s); stroke-width: 1.6; stroke-dasharray: 3 3; opacity: .4; }
+.ticket { fill: var(--paper); stroke: var(--line); stroke-width: 2; }
+.perf { stroke: var(--line); stroke-width: 2; stroke-dasharray: 4 4; }
+.mini-plane { fill: none; stroke: var(--muted); stroke-width: 3; stroke-linecap: round; opacity: .55; }
+/* 航班看板、飛機、鴿子 */
+.rod { stroke: var(--tower); stroke-width: 3; stroke-linecap: round; }
+.rope { stroke: var(--dream-s); stroke-width: 2; }
+.window { fill: var(--dream-s); }
+.engine-core { fill: var(--dream-s); opacity: .55; }
+.gear { stroke: var(--earth); stroke-width: 3; stroke-linecap: round; }
+.tyre { fill: var(--earth); }
+.pigeon { fill: var(--pigeon); stroke: var(--nightmare-s); stroke-width: 1.3; stroke-linejoin: round; }
+.pigeon .beak { fill: var(--beak); stroke: none; }
+.pigeon .eye { fill: var(--nightmare-s); stroke: none; }
+/* 跑道、行李箱、塔台 */
+.mark { fill: var(--mark); }
+.mark-line { fill: none; stroke: var(--mark); stroke-width: 3; stroke-dasharray: 12 10; }
+.handle { fill: none; stroke: var(--contribution-s); stroke-width: 6; stroke-linecap: round; }
+.strap { stroke: var(--contribution-s); stroke-width: 3; opacity: .5; }
+.wheel { fill: var(--contribution-s); }
+.tag { fill: var(--paper); stroke: var(--contribution-s); stroke-width: 2; }
+.tower { fill: var(--paper); stroke: var(--tower); stroke-width: 2.5; stroke-linejoin: round; }
+.tower-glass { fill: var(--dream-f); stroke: var(--tower); stroke-width: 1.5; }
+/* 高對比（黑底黃字）只留主要外框，省略裝飾線條，畫面比較單純 */
+:root[data-contrast="high"] :is(.tuft, .pin, .stamp, .flap, .rod, .perf, .mini-plane, .mark, .mark-line,
+  .strap, .tag, .wheel, .engine-core, .gear, .tyre, .window, .beak, .eye) { display: none; }
+:root[data-contrast="high"] .cover { fill: var(--paper); }
+
+.region {
+  position: absolute; z-index: 1;
+  left: var(--l); top: var(--t); width: var(--w); height: var(--h);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .25em;
+  padding: .2em; border: 0; border-radius: 1em; background: transparent;
+  color: var(--fg); font-family: var(--font-display);
+  font-size: clamp(.7rem, 2.4cqi, 3rem); line-height: 1.25; text-align: center; cursor: pointer;
+}
+/* 每個區塊的標題都放在同樣的白底框裡：編號在上、標題在下 */
+.r-head {
+  display: flex; flex: none; flex-direction: column; align-items: center; justify-content: center; gap: .2em; white-space: nowrap;
+  padding: .4em .85em; border: 2px solid var(--rs, var(--ink)); border-radius: .6em;
+  background: var(--paper); color: var(--fg); box-shadow: 0 3px 8px var(--shadow);
+}
+.r-title { font-weight: 700; font-size: 1.15em; }
+/* 2、3、5、6 的編號和標題排在同一行 */
+.region[data-r="dream"] .r-head,
+.region[data-r="nightmare"] .r-head,
+.region[data-r="needs"] .r-head,
+.region[data-r="plan"] .r-head { flex-direction: row; gap: .4em; }
+.flap { fill: var(--board-line); }
+/* 地圖很窄時（手機）收起登機證上的小字，資料在「訪談資訊」裡 */
+@container (max-width: 560px) { .mapfor { display: none; } }
+/* 登機證上的旅客與同行夥伴 */
+.mapfor {
+  position: absolute; left: 5.9%; top: 40.6%; width: 24%;
+  margin: 0; font-family: var(--font-display); font-size: clamp(.62rem, 1.6cqi, 2rem); line-height: 1.55;
+}
+.mapfor span { color: var(--muted); }
+
+.badge {
+  display: inline-grid; place-items: center; flex: none;
+  min-width: 1.7em; height: 1.7em; padding: 0 .3em;
+  background: var(--rs, var(--ink)); color: var(--badge-fg);
+  font-family: var(--font-body); font-weight: 700; font-size: .85em; line-height: 1; border-radius: 4px;
+}
+
+/* 放大檢視（簡報） */
+#viewer {
+  width: min(46rem, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  padding: 0; border: 3px solid var(--rs, var(--ink)); border-radius: 16px;
+  background: var(--paper); color: var(--fg);
+}
+#viewer::backdrop { background: rgb(0 0 0 / .5); }
+#viewer.zoom { animation: zoom .34s cubic-bezier(.2, .8, .2, 1); }
+@keyframes zoom {
+  from { opacity: 0; transform: translate(var(--dx, 0), var(--dy, 0)) scale(.3); }
+  to { opacity: 1; transform: none; }
+}
+.v-inner { display: grid; gap: 1rem; padding: 1.25rem 1.5rem 1.5rem; }
+.v-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }
+.v-progress { margin: 0; color: var(--muted); font-size: .9rem; }
+#v-title { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font-family: var(--font-display); font-size: 1.8rem; line-height: 1.3; }
+#v-title .count { font-family: var(--font-body); font-size: .55em; font-weight: 500; color: var(--muted); }
+#v-body.swap { animation: fade .25s ease-out; }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.v-nav { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; padding-top: .5rem; border-top: 2px solid var(--line); }
+.v-nav { align-items: center; }
+.v-nav .tool-btn[disabled] { opacity: .4; cursor: default; }
+.v-keys { margin: 0; font-size: .8rem; color: var(--muted); }
+
+/* 文字版 */
+.areas { display: grid; gap: 1rem; }
+.area { background: var(--surface); border: 2px solid var(--line); border-radius: 12px; scroll-margin-top: 1rem; }
+.area-h { margin: 0; font-size: 1.25rem; line-height: 1.45; }
+.area-btn {
+  width: 100%; min-height: 3.75rem;
+  display: flex; align-items: center; gap: .75rem;
+  padding: 1rem 1.25rem;
+  font: inherit; font-weight: 700; text-align: left; color: inherit;
+  background: none; border: 0; border-radius: 10px; cursor: pointer;
+}
+.area-btn:hover { background: var(--tint); }
+.area-title { min-width: 0; }
+.count { font-size: .8em; font-weight: 500; color: var(--muted); }
+.sign { margin-left: auto; flex: none; width: 1.6em; height: 1.6em; color: var(--ink); }
+.sign .v { transition: opacity .15s; }
+.area-btn[aria-expanded="true"] .sign .v { opacity: 0; }
+.panel { padding: 1rem 1.25rem 1.25rem; border-top: 2px solid var(--line); }
+
+/* 內容（文字版與放大檢視共用） */
+ul.items { margin: 0; padding-left: 1.25em; }
+ul.items > li + li { margin-top: 1rem; }
+ul.items > li::marker { color: var(--ink); }
+.items p { margin: 0; }
+.who { color: var(--muted); }
+.quote { margin-top: .4rem !important; padding: .55rem .85rem; border-radius: 8px; background: var(--quote); }
+.quote-label { font-weight: 700; }
+.table-wrap { overflow-x: auto; }
+.plan-table { width: 100%; min-width: 26rem; border-collapse: collapse; }
+.plan-table th, .plan-table td { padding: .55rem .75rem; border: 2px solid var(--line); text-align: left; vertical-align: top; }
+.plan-table th { background: var(--quote); }
+.back {
+  margin-top: 1.25rem; min-height: 44px; padding: .45rem 1rem;
+  font: inherit; font-size: .9rem; color: var(--fg);
+  background: transparent; border: 2px solid var(--line); border-radius: 8px; cursor: pointer;
+}
+.back:hover { border-color: var(--ink); }
+
+/* 編輯模式 */
+.meta dd:empty::before { content: "未填寫"; color: var(--muted); }
+.empty-note { margin: 0 0 .9rem; color: var(--muted); }
+.edit-steps { margin: 0; padding-left: 1.4em; display: grid; gap: .35rem; }
+.edit-msg { margin: 0; font-weight: 500; }
+.edit-msg:empty { display: none; }
+.editing [contenteditable] {
+  outline: 2px dashed var(--line); outline-offset: 3px; border-radius: 4px; min-height: 1.6em; cursor: text;
+}
+.editing [contenteditable]:focus { outline: 3px solid var(--focus); }
+[contenteditable][data-placeholder]:empty::before { content: attr(data-placeholder); color: var(--muted); }
+.del-btn {
+  margin-top: .4rem; min-height: 36px; padding: .2rem .75rem;
+  font: inherit; font-size: .85rem; color: var(--fg);
+  background: transparent; border: 2px solid var(--line); border-radius: 6px; cursor: pointer;
+}
+.del-btn:hover { border-color: var(--focus); }
+.add-btn { margin: 1rem .5rem 0 0; }
+td.edit-ui, th.edit-ui { width: 1%; white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, #viewer.zoom, #v-body.swap { transition: none !important; animation: none !important; }
+}
+</style>
+
+<a class="skip" href="#map-h">跳到 MAPS 地圖</a>
+<main class="page" lang="zh-Hant-TW">
+
+  <header class="masthead">
+    <p class="eyebrow">以人為中心計畫 · MAPS 訪談整理</p>
+    <h1><span id="person-name">受訪者</span>的 MAPS</h1>
+    <nav class="tabs" aria-label="訪談資訊與設定">
+      <button type="button" class="tab-btn" id="tab-info" aria-expanded="false" aria-controls="panel-info">訪談資訊</button>
+      <button type="button" class="tab-btn" id="tab-settings" aria-expanded="false" aria-controls="panel-settings">閱讀設定</button>
+      <button type="button" class="tab-btn" id="tab-text" aria-expanded="false" aria-controls="panel-text">文字版</button>
+      <button type="button" class="tab-btn" id="tab-edit" aria-expanded="false" aria-controls="panel-edit">編輯內容</button>
+      <button type="button" class="tab-btn full-open" id="full-btn">全螢幕地圖</button>
+    </nav>
+  </header>
+
+  <div class="edit-bar" id="edit-bar">
+    <p>編輯模式：點虛線框就能直接修改。</p>
+    <button type="button" class="tool-btn" id="bar-save">儲存成新檔案</button>
+    <button type="button" class="tool-btn" id="bar-exit">結束編輯</button>
+  </div>
+
+  <div class="tab-panels narrow">
+    <section class="tab-panel" id="panel-info" aria-labelledby="panel-info-h" hidden>
+      <h2 id="panel-info-h">訪談資訊</h2>
+      <dl class="meta">
+          <div><dt>MAPS 主角：</dt><dd id="map-for"></dd></div>
+          <div><dt>支持者：</dt><dd id="supported-by"></dd></div>
+          <div><dt>訪談日期：</dt><dd></dd></div>
+          <div><dt>引導者：</dt><dd></dd></div>
+        </dl>
+    </section>
+
+    <section class="tab-panel" id="panel-settings" aria-labelledby="panel-settings-h" hidden>
+      <h2 id="panel-settings-h">閱讀設定（字級、高對比）</h2>
+      <div class="tool-row" role="group" aria-labelledby="size-label">
+          <span class="tool-label" id="size-label">字級</span>
+          <button type="button" class="tool-btn" data-scale="1" aria-pressed="true">標準</button>
+          <button type="button" class="tool-btn" data-scale="1.5" aria-pressed="false">大（150%）</button>
+          <button type="button" class="tool-btn" data-scale="2" aria-pressed="false">特大（200%）</button>
+        </div>
+        <div class="tool-row">
+          <button type="button" class="tool-btn" id="contrast" aria-pressed="false">高對比（黑底黃字）</button>
+        </div>
+    </section>
+
+    <section class="tab-panel" id="panel-text" aria-labelledby="panel-text-h" hidden>
+      <h2 id="panel-text-h">文字版（適合螢幕報讀）</h2>
+      <div class="tool-row">
+        <button type="button" class="tool-btn" id="expand-all">全部展開</button>
+        <button type="button" class="tool-btn" id="collapse-all">全部收合</button>
+      </div>
+    <div class="areas" id="areas">
+      <!--
+        每個區塊 = 一個標題按鈕 + 一個內容面板，地圖和放大檢視都從這裡讀取內容。
+        建議用頁面最下方「編輯內容」裡的編輯模式修改，改完存成新檔案。
+        也可以直接改這裡的 <li>（行動約定改表格的 <tr>），「共幾項」會自動計算。
+        data-n 是地圖上的編號；區塊的 id 決定它在地圖上的位置，請不要更改。
+      -->
+
+      <!-- ===== 1 故事 ===== -->
+      <section class="area" id="story" data-n="1">
+        <h3 class="area-h">
+          <button type="button" class="area-btn" id="story-btn" aria-expanded="true" aria-controls="story-panel">
+            <span class="badge">1</span> <span class="area-title">故事</span><span class="count"></span>
+            <svg class="sign" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 12h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="v" d="M12 7v10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </button>
+        </h3>
+        <div class="panel" id="story-panel">
+          <ul class="items"></ul>
+        </div>
+      </section>
+
+      <!-- ===== 2 夢想 ===== -->
+      <section class="area" id="dream" data-n="2">
+        <h3 class="area-h">
+          <button type="button" class="area-btn" id="dream-btn" aria-expanded="true" aria-controls="dream-panel">
+            <span class="badge">2</span> <span class="area-title">夢想</span><span class="count"></span>
+            <svg class="sign" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 12h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="v" d="M12 7v10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </button>
+        </h3>
+        <div class="panel" id="dream-panel">
+          <ul class="items"></ul>
+        </div>
+      </section>
+
+      <!-- ===== 3 惡夢 ===== -->
+      <section class="area" id="nightmare" data-n="3">
+        <h3 class="area-h">
+          <button type="button" class="area-btn" id="nightmare-btn" aria-expanded="true" aria-controls="nightmare-panel">
+            <span class="badge">3</span> <span class="area-title">惡夢</span><span class="count"></span>
+            <svg class="sign" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 12h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="v" d="M12 7v10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </button>
+        </h3>
+        <div class="panel" id="nightmare-panel">
+          <ul class="items"></ul>
+        </div>
+      </section>
+
+      <!-- ===== 4 天賦與貢獻 ===== -->
+      <section class="area" id="contribution" data-n="4">
+        <h3 class="area-h">
+          <button type="button" class="area-btn" id="contribution-btn" aria-expanded="true" aria-controls="contribution-panel">
+            <span class="badge">4</span> <span class="area-title">天賦與貢獻</span><span class="count"></span>
+            <svg class="sign" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 12h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="v" d="M12 7v10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </button>
+        </h3>
+        <div class="panel" id="contribution-panel">
+          <ul class="items"></ul>
+        </div>
+      </section>
+
+      <!-- ===== 5 需要什麼 ===== -->
+      <section class="area" id="needs" data-n="5">
+        <h3 class="area-h">
+          <button type="button" class="area-btn" id="needs-btn" aria-expanded="true" aria-controls="needs-panel">
+            <span class="badge">5</span> <span class="area-title">需要什麼</span><span class="count"></span>
+            <svg class="sign" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 12h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="v" d="M12 7v10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </button>
+        </h3>
+        <div class="panel" id="needs-panel">
+          <ul class="items"></ul>
+        </div>
+      </section>
+
+      <!-- ===== 6 行動約定 ===== -->
+      <section class="area" id="plan" data-n="6">
+        <h3 class="area-h">
+          <button type="button" class="area-btn" id="plan-btn" aria-expanded="true" aria-controls="plan-panel">
+            <span class="badge">6</span> <span class="area-title">行動約定</span><span class="count"></span>
+            <svg class="sign" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 12h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="v" d="M12 7v10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </button>
+        </h3>
+        <div class="panel" id="plan-panel">
+          <div class="table-wrap">
+            <table class="items plan-table">
+              <caption class="sr-only">行動約定：誰、做什麼、何時完成</caption>
+              <thead><tr><th scope="col">誰</th><th scope="col">做什麼</th><th scope="col">何時完成</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 回應與承諾（地圖右下角，沒有編號） ===== -->
+      <section class="area" id="reactions">
+        <h3 class="area-h">
+          <button type="button" class="area-btn" id="reactions-btn" aria-expanded="true" aria-controls="reactions-panel">
+            <span class="area-title">回應與承諾</span><span class="count"></span>
+            <svg class="sign" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 12h10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path class="v" d="M12 7v10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          </button>
+        </h3>
+        <div class="panel" id="reactions-panel">
+          <ul class="items"></ul>
+        </div>
+      </section>
+    </div>
+    </section>
+
+    <section class="tab-panel" id="panel-edit" aria-labelledby="panel-edit-h" hidden>
+      <h2 id="panel-edit-h">編輯內容（研究者使用）</h2>
+      <ol class="edit-steps">
+        <li>按「編輯模式」後會切到「文字版」，有虛線框的地方都能直接修改。受訪者姓名和日期在「訪談資訊」。</li>
+        <li>每一區可以按「＋ 新增一項」；在項目裡按 Enter 也會新增下一項。</li>
+        <li>改完按「儲存成新檔案」，瀏覽器會下載一份新的 HTML 檔。資料只存在你的電腦，不會上傳。</li>
+      </ol>
+      <div class="tool-row">
+        <button type="button" class="tool-btn" id="edit-toggle" aria-pressed="false">編輯模式</button>
+        <button type="button" class="tool-btn" id="edit-save">儲存成新檔案</button>
+      </div>
+      <p class="edit-msg" id="edit-msg"></p>
+    </section>
+  </div>
+
+  <section class="map-section" id="map-section" aria-labelledby="map-h">
+    <h2 id="map-h" class="sr-only" tabindex="-1">MAPS 地圖</h2>
+    <p class="sr-only">這張地圖畫成一座機場：故事是護照，夢想是停在跑道上、機頭朝向你的飛機，惡夢是天空正中間的烏雲和擋路的鴿子，天賦與貢獻是行李箱，需要什麼是飛機下方跑道上的指示牌，行動約定是右上角的航班看板，回應與承諾是看板下方的塔台指揮室。地圖上每個區塊都是按鈕，按下會放大顯示內容。放大後可以用左右方向鍵切換區塊，按 Esc 回到地圖。標題下方的「文字版」有相同的內容。用滑鼠點地圖，或按「全螢幕地圖」，可以把地圖放大到整個螢幕。</p>
+    <div class="map-stage" id="map-stage">
+      <button type="button" class="tool-btn exit-full" id="exit-full">離開全螢幕（Esc）</button>
+      <div class="map-scroll">
+        <div class="board" id="board"></div>
+      </div>
+    </div>
+    <noscript><p>這個瀏覽器沒有開啟 JavaScript，所以地圖無法顯示。請打開「文字版」閱讀。</p></noscript>
+  </section>
+
+  <dialog id="viewer" aria-labelledby="v-title">
+    <div class="v-inner">
+      <div class="v-head">
+        <p class="v-progress" id="v-progress"></p>
+        <button type="button" class="tool-btn" id="v-close">回到地圖</button>
+      </div>
+      <h2 id="v-title" tabindex="-1"></h2>
+      <div id="v-body"></div>
+      <div class="v-nav">
+        <button type="button" class="tool-btn" id="v-prev"></button>
+        <p class="v-keys" aria-hidden="true">鍵盤：← → 切換，Esc 回到地圖</p>
+        <button type="button" class="tool-btn" id="v-next"></button>
+      </div>
+    </div>
+  </dialog>
+
+  <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+</main>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  root.lang = 'zh-Hant-TW';
+  var reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+  var status = document.getElementById('status');
+  function say(msg) {
+    status.textContent = '';
+    setTimeout(function () { status.textContent = msg; }, 60);
+  }
+
+  var areas = Array.prototype.slice.call(document.querySelectorAll('.area'));
+  function parts(area) {
+    var btn = area.querySelector('.area-btn');
+    return { btn: btn, panel: document.getElementById(btn.getAttribute('aria-controls')) };
+  }
+  function titleOf(area) { return area.querySelector('.area-title').textContent; }
+  function itemsOf(area) { return parts(area).panel.querySelectorAll('ul.items > li, .items > tbody > tr'); }
+
+  /* ---------- 文字版：展開／收合 ---------- */
+  function setOpen(area, on) {
+    var p = parts(area);
+    p.btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+    p.panel.hidden = !on;
+  }
+  function saveOpen() {
+    var open = {};
+    areas.forEach(function (a) { if (parts(a).btn.getAttribute('aria-expanded') === 'true') open[a.id] = 1; });
+    store.set('maps-open', JSON.stringify(open));
+  }
+  var saved = {};
+  try { saved = JSON.parse(store.get('maps-open') || '{}') || {}; } catch (e) {}
+
+  areas.forEach(function (area) {
+    var p = parts(area);
+    area.querySelector('.count').textContent = '（共 ' + itemsOf(area).length + ' 項）';
+    var back = document.createElement('button');
+    back.type = 'button';
+    back.className = 'back';
+    back.textContent = '收合「' + titleOf(area) + '」，回到標題';
+    back.addEventListener('click', function () { setOpen(area, false); p.btn.focus(); saveOpen(); });
+    p.panel.appendChild(back);
+    p.btn.addEventListener('click', function () {
+      setOpen(area, p.btn.getAttribute('aria-expanded') !== 'true');
+      saveOpen();
+    });
+    setOpen(area, !!saved[area.id]);
+  });
+  document.getElementById('expand-all').addEventListener('click', function () {
+    areas.forEach(function (a) { setOpen(a, true); });
+    saveOpen();
+    say('已展開全部 ' + areas.length + ' 個區塊');
+  });
+  document.getElementById('collapse-all').addEventListener('click', function () {
+    areas.forEach(function (a) { setOpen(a, false); });
+    saveOpen();
+    say('已收合全部 ' + areas.length + ' 個區塊');
+  });
+
+  /* ---------- 地圖 ---------- */
+  // 每個區塊在 880 × 670 畫布上的按鈕範圍 [x, y, 寬, 高]
+  var REGIONS = {
+    story:        { box: [44, 56, 118, 170] },   // 護照左頁
+    dream:        { box: [400, 398, 120, 48] },  // 跑道上飛機的機身
+    nightmare:    { box: [380, 122, 160, 56] },  // 上方中間的烏雲
+    plan:         { box: [616, 40, 228, 124] },  // 航班看板（右上）
+    needs:        { box: [388, 540, 144, 52] },  // 跑道上的指示牌
+    contribution: { box: [92, 486, 166, 128] },  // 行李箱
+    reactions:    { box: [640, 298, 180, 62] }   // 塔台指揮室（看板下方，箭頭相連）
+  };
+
+  function f(n) { return Math.round(n * 10) / 10; }
+  function rng(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+  function cloud(cx, cy, rx, ry, n, seed) {
+    var r = rng(seed), pts = [], i;
+    for (i = 0; i < n; i++) {
+      var a = i / n * Math.PI * 2, j = 1 + (r() - .5) * .08;
+      pts.push([cx + rx * j * Math.cos(a), cy + ry * j * Math.sin(a)]);
+    }
+    var d = 'M' + f(pts[0][0]) + ' ' + f(pts[0][1]);
+    for (i = 0; i < n; i++) {
+      var q = pts[(i + 1) % n], am = (i + .5) / n * Math.PI * 2, k = 1.13 + (r() - .5) * .05;
+      d += ' Q' + f(cx + rx * k * Math.cos(am)) + ' ' + f(cy + ry * k * Math.sin(am)) + ' ' + f(q[0]) + ' ' + f(q[1]);
+    }
+    return d + 'Z';
+  }
+  function pin(x, y) { return '<path class="pin" d="M' + x + ' ' + (y - 7) + 'l7 7-7 7-7-7z"/>'; }
+  function pigeon(x, y, s, flip) {
+    return '<g class="pigeon" transform="translate(' + x + ' ' + y + ') scale(' + (flip ? -s : s) + ' ' + s + ')">' +
+      '<path d="M-19 -4 L-10 -1 L-18 4Z"/>' +
+      '<ellipse cx="0" cy="0" rx="12" ry="7"/>' +
+      '<circle cx="11" cy="-6" r="5"/>' +
+      '<path class="beak" d="M15.5 -7 L21 -5.5 L15.5 -4Z"/>' +
+      '<circle class="eye" cx="12.5" cy="-7.2" r="1.1"/>' +
+      '<path d="M-7 -2 Q-3 -19 9 -8 Q2 -4 -7 -2Z"/>' +
+      '</g>';
+  }
+  // 航班看板下方一排翻牌
+  function flaps() {
+    var out = '', i;
+    for (i = 0; i < 6; i++) out += '<rect class="flap" x="' + (626 + i * 36) + '" y="174" width="28" height="36" rx="3"/>';
+    return out;
+  }
+  function pianoKeys() {
+    var out = '';
+    [334, 352, 370, 388, 522, 540, 558, 576].forEach(function (x) {
+      out += '<rect class="mark" x="' + x + '" y="636" width="10" height="20"/>';
+    });
+    return out;
+  }
+  function tuft(x, y) {
+    return '<path class="tuft" d="M' + x + ' ' + y + 'q2 -12 6 -15 M' + (x + 7) + ' ' + y + 'q0 -11 1 -19 M' + (x + 13) + ' ' + y + 'q1 -8 7 -12"/>';
+  }
+
+  var svg =
+    '<svg class="drawing" viewBox="0 0 880 670" aria-hidden="true" focusable="false">' +
+    '<defs>' +
+    '<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--sky-top)"/><stop offset="1" style="stop-color:var(--sky-bottom)"/></linearGradient>' +
+    '<filter id="soft" x="-10%" y="-10%" width="120%" height="135%"><feDropShadow dx="0" dy="4" stdDeviation="5" style="flood-color:var(--shadow)"/></filter>' +
+    '</defs>' +
+    '<rect class="paper" x="6" y="6" width="868" height="658" rx="2"/>' +
+    '<rect x="7" y="7" width="866" height="400" fill="url(#sky)"/>' +
+    '<path class="ground" d="M7 406 Q120 398 240 404 T480 402 T720 404 T873 400 L873 663 L7 663Z"/>' +
+    tuft(36, 652) + tuft(290, 560) + tuft(670, 636) + tuft(846, 652) +
+    pin(8, 8) + pin(872, 8) + pin(8, 662) + pin(872, 662) +
+    // 1 故事：打開的護照
+    '<path class="cover soft" d="M30 48 Q97 36 165 54 Q233 36 300 48 L300 230 Q233 220 165 240 Q97 220 30 230Z"/>' +
+    '<path class="shape" data-r="story" d="M165 50 Q100 30 40 42 L40 222 Q100 212 165 232Z"/>' +
+    '<path class="shape" data-r="story" d="M165 50 Q230 30 290 42 L290 222 Q230 212 165 232Z"/>' +
+    '<circle class="stamp" cx="228" cy="96" r="24"/><circle class="stamp" cx="228" cy="96" r="16"/>' +
+    '<rect class="stamp" x="196" y="148" width="66" height="36" rx="4" transform="rotate(-10 229 166)"/>' +
+
+    // 登機證：旅客與同行夥伴
+    '<rect class="ticket soft" x="40" y="262" width="270" height="78" rx="8"/>' +
+    '<path class="perf" d="M262 268 V334"/>' +
+    '<path class="mini-plane" d="M274 301 H298 M290 301 L282 290 M290 301 L282 312 M277 301 L273 295 M277 301 L273 307"/>' +
+
+    // 6 行動約定：航班看板（右上）
+    '<path class="rod" d="M654 8 V30 M806 8 V30"/>' +
+    '<rect class="shape soft" data-r="plan" x="610" y="30" width="240" height="200" rx="12"/>' +
+    flaps() +
+
+    // 3 惡夢：天空正中間的烏雲和擋路的鴿子
+    '<path class="shape soft" data-r="nightmare" d="' + cloud(460, 150, 106, 56, 14, 51) + '"/>' +
+    pigeon(352, 236, 1.3, false) + pigeon(572, 232, 1.2, true) + pigeon(548, 70, 1, true) +
+
+    // 5 需要什麼：跑道，標題放在一塊獨立的指示牌上
+    '<path class="shape soft" data-r="needs" d="M424 404 L496 404 L620 664 L300 664Z"/>' +
+    '<path class="mark-line" d="M460 410 V440"/>' + pianoKeys() +
+
+    // 2 夢想：停在跑道上、機頭朝向你的飛機
+    '<g class="plane" transform="translate(460 420) scale(1.4) translate(-460 -496)">' +
+    '<path class="shape" data-r="dream" d="M453 448 L457 412 Q460 404 463 412 L467 448Z"/>' +
+    '<path class="shape" data-r="dream" d="M460 446 L404 438 Q400 440 402 444 L460 460 L516 444 Q518 440 514 438Z"/>' +
+    '<path class="gear" d="M460 550 V558 M406 528 V541 M514 528 V541"/>' +
+    '<rect class="tyre" x="455" y="556" width="10" height="9" rx="2.5"/>' +
+    '<rect class="tyre" x="401" y="539" width="10" height="10" rx="2.5"/><rect class="tyre" x="509" y="539" width="10" height="10" rx="2.5"/>' +
+    '<path class="shape soft" data-r="dream" d="M460 500 L304 482 Q296 482 298 490 L460 528 L622 490 Q624 482 616 482Z"/>' +
+    '<circle class="shape" data-r="dream" cx="380" cy="526" r="17"/><circle class="engine-core" cx="380" cy="526" r="9"/>' +
+    '<circle class="shape" data-r="dream" cx="540" cy="526" r="17"/><circle class="engine-core" cx="540" cy="526" r="9"/>' +
+    '<circle class="shape soft" data-r="dream" cx="460" cy="496" r="56"/>' +
+    '<path class="window" d="M428 462 Q460 444 492 462 L488 471 Q460 457 432 471Z"/>' +
+    '</g>' +
+
+    // 4 天賦與貢獻：行李箱
+    '<path class="handle" d="M140 474 V452 Q140 442 150 442 H200 Q210 442 210 452 V474"/>' +
+    '<rect class="shape soft" data-r="contribution" x="80" y="472" width="190" height="152" rx="18"/>' +
+    '<path class="strap" d="M116 476 V496 M234 476 V496 M116 600 V620 M234 600 V620"/>' +
+    '<circle class="wheel" cx="104" cy="632" r="8"/><circle class="wheel" cx="246" cy="632" r="8"/>' +
+    '<path class="tag" d="M140 452 L112 466"/>' +
+    '<rect class="tag" x="88" y="458" width="32" height="20" rx="4" transform="rotate(-28 104 468)"/>' +
+
+    // 回應與承諾：塔台指揮室，在航班看板下方
+    '<path class="tower" d="M716 640 V364 H744 V640Z"/>' +
+    '<rect class="tower" x="704" y="636" width="52" height="12" rx="3"/>' +
+    '<path class="tower" d="M634 292 L730 274 L826 292Z"/>' +
+    '<path class="shape soft" data-r="reactions" d="M622 292 H838 L822 366 H638Z"/>' +
+    '</svg>';
+
+  var board = document.getElementById('board');
+  board.innerHTML = svg;
+
+  // 圖案上的小物件也歸到各自的區塊，點圖案和點標題一樣會打開
+  var DECOR = {
+    story: '.cover, .stamp',
+    plan: '.rod:not(.tower-rod), .flap',
+    dream: '.plane, .rope',
+    nightmare: '.pigeon',
+    needs: '.mark, .mark-line',
+    contribution: '.handle, .strap, .wheel, .tag',
+    reactions: '.tower, .tower-glass, .tower-rod'
+  };
+  Object.keys(DECOR).forEach(function (id) {
+    Array.prototype.forEach.call(board.querySelectorAll(DECOR[id]), function (el) { el.setAttribute('data-r', id); });
+  });
+
+  var mapFor = document.createElement('p');
+  mapFor.className = 'mapfor';
+  mapFor.setAttribute('aria-hidden', 'true');
+  mapFor.innerHTML = '<span>旅客：</span>' + document.getElementById('map-for').textContent +
+    '<br><span>同行：</span>' + document.getElementById('supported-by').textContent;
+  board.appendChild(mapFor);
+
+  var mapped = areas.filter(function (a) { return REGIONS[a.id]; });
+  var regionBtns = [];
+  var byId = {};
+  mapped.forEach(function (area, i) {
+    var cfg = REGIONS[area.id], b = cfg.box, n = area.getAttribute('data-n');
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'region';
+    btn.setAttribute('data-r', area.id);
+    btn.style.setProperty('--rs', 'var(--' + area.id + '-s)');
+    area.style.setProperty('--rs', 'var(--' + area.id + '-s)');
+    btn.style.setProperty('--l', (b[0] / 880 * 100) + '%');
+    btn.style.setProperty('--t', (b[1] / 670 * 100) + '%');
+    btn.style.setProperty('--w', (b[2] / 880 * 100) + '%');
+    btn.style.setProperty('--h', (b[3] / 670 * 100) + '%');
+    // 螢幕報讀軟體唸出：「1 故事，共 4 項」
+    btn.setAttribute('aria-label', (n ? n + ' ' : '') + titleOf(area) + '，共 ' + itemsOf(area).length + ' 項');
+    // 地圖上只顯示編號和標題，內容按下去才看
+    btn.innerHTML = '<span class="r-head">' + (n ? '<span class="badge">' + n + '</span> ' : '') +
+      '<span class="r-title">' + titleOf(area) + '</span></span>';
+    var shapes = board.querySelectorAll('.shape[data-r="' + area.id + '"]');
+    function hot(on) { Array.prototype.forEach.call(shapes, function (s) { s.classList.toggle('hot', on); }); }
+    btn.addEventListener('pointerenter', function () { hot(true); });
+    btn.addEventListener('pointerleave', function () { if (document.activeElement !== btn) hot(false); });
+    btn.addEventListener('focus', function () { hot(true); });
+    btn.addEventListener('blur', function () { hot(false); });
+    btn.addEventListener('click', function () { openViewer(i, btn); });
+    byId[area.id] = { btn: btn, hot: hot };
+    board.appendChild(btn);
+    regionBtns.push(btn);
+  });
+
+  // 滑鼠或手指點在圖案上：亮起該區，按下就打開（鍵盤和報讀軟體使用上面的按鈕）
+  var drawing = board.querySelector('.drawing');
+  var hovered = null;
+  function regionOf(e) {
+    var el = e.target.closest && e.target.closest('[data-r]');
+    var id = el && el.getAttribute('data-r');
+    return byId[id] ? id : null;
+  }
+  function hoverTo(id) {
+    if (hovered && hovered !== id) byId[hovered].hot(false);
+    hovered = id;
+    if (id) byId[id].hot(true);
+  }
+  drawing.addEventListener('pointerover', function (e) { hoverTo(regionOf(e)); });
+  drawing.addEventListener('pointerleave', function () { hoverTo(null); });
+  drawing.addEventListener('click', function (e) {
+    var id = regionOf(e);
+    if (id) byId[id].btn.click();
+  });
+
+  /* ---------- 放大檢視（簡報） ---------- */
+  var viewer = document.getElementById('viewer');
+  var vTitle = document.getElementById('v-title');
+  var vBody = document.getElementById('v-body');
+  var vProgress = document.getElementById('v-progress');
+  var vPrev = document.getElementById('v-prev');
+  var vNext = document.getElementById('v-next');
+  var current = 0;
+
+  function label(area) {
+    var n = area.getAttribute('data-n');
+    return (n ? n + ' ' : '') + titleOf(area);
+  }
+  function show(i) {
+    current = i;
+    var area = mapped[i], n = area.getAttribute('data-n');
+    viewer.style.setProperty('--rs', 'var(--' + area.id + '-s)');
+    vTitle.innerHTML = (n ? '<span class="badge">' + n + '</span> ' : '') +
+      '<span>' + titleOf(area) + '</span><span class="count">（共 ' + itemsOf(area).length + ' 項）</span>';
+    var clone = parts(area).panel.cloneNode(true);
+    Array.prototype.forEach.call(clone.querySelectorAll('.back, .edit-ui'), function (el) { el.remove(); });
+    Array.prototype.forEach.call(clone.querySelectorAll('[contenteditable]'), function (el) { el.removeAttribute('contenteditable'); });
+    vBody.innerHTML = '';
+    while (clone.firstChild) vBody.appendChild(clone.firstChild);
+    vProgress.textContent = '第 ' + (i + 1) + ' 區，共 ' + mapped.length + ' 區';
+    vPrev.disabled = i === 0;
+    vNext.disabled = i === mapped.length - 1;
+    // 箭頭只給眼睛看，螢幕報讀軟體只會唸出「上一區：1 故事」
+    var esc = function (s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+    vPrev.innerHTML = '<span aria-hidden="true">← </span>上一區' + (i > 0 ? '：' + esc(label(mapped[i - 1])) : '');
+    vNext.innerHTML = '下一區' + (i < mapped.length - 1 ? '：' + esc(label(mapped[i + 1])) : '') + '<span aria-hidden="true"> →</span>';
+    vBody.classList.remove('swap');
+    void vBody.offsetWidth;
+    if (!reduceMotion) vBody.classList.add('swap');
+  }
+  function openViewer(i, fromBtn) {
+    show(i);
+    var r = fromBtn.getBoundingClientRect();
+    viewer.style.setProperty('--dx', (r.left + r.width / 2 - innerWidth / 2) + 'px');
+    viewer.style.setProperty('--dy', (r.top + r.height / 2 - innerHeight / 2) + 'px');
+    viewer.classList.remove('zoom');
+    if (!reduceMotion) viewer.classList.add('zoom');
+    if (typeof viewer.showModal === 'function') viewer.showModal();
+    else viewer.setAttribute('open', '');
+    vTitle.focus();
+  }
+  function step(d) {
+    var j = current + d;
+    if (j < 0 || j >= mapped.length) return;
+    show(j);
+    vTitle.focus();
+  }
+  vPrev.addEventListener('click', function () { step(-1); });
+  vNext.addEventListener('click', function () { step(1); });
+  document.getElementById('v-close').addEventListener('click', function () { viewer.close(); });
+  viewer.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
+  });
+  viewer.addEventListener('click', function (e) { if (e.target === viewer) viewer.close(); });
+  viewer.addEventListener('close', function () {
+    var btn = regionBtns[current];
+    setTimeout(function () { btn.focus({ preventScroll: false }); }, 0);
+  });
+
+  /* ---------- 標題下方的標籤：一次打開一個，再按一次收起 ---------- */
+  var tabBtns = Array.prototype.slice.call(document.querySelectorAll('.tab-btn[aria-controls]'));
+  function openTab(name) {
+    tabBtns.forEach(function (b) {
+      var on = b.id === 'tab-' + name;
+      b.setAttribute('aria-expanded', on ? 'true' : 'false');
+      document.getElementById(b.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      openTab(b.getAttribute('aria-expanded') === 'true' ? null : b.id.slice(4));
+    });
+  });
+
+  // 量出標題和標籤的高度，讓地圖剛好塞進一個畫面
+  function measureChrome() {
+    if (tabBtns.some(function (b) { return b.getAttribute('aria-expanded') === 'true'; })) return;
+    var top = document.getElementById('map-section').getBoundingClientRect().top + window.scrollY;
+    root.style.setProperty('--chrome', Math.round(top + 30) + 'px');
+  }
+  window.addEventListener('resize', measureChrome);
+  measureChrome();
+
+  /* ---------- 全螢幕地圖：滑鼠或手指點地圖、或按「全螢幕地圖」 ---------- */
+  var stage = document.getElementById('map-stage');
+  var fullBtn = document.getElementById('full-btn');
+  var exitBtn = document.getElementById('exit-full');
+  function isFull() { return stage.classList.contains('is-full'); }
+  function enterFull() {
+    if (isFull()) return;
+    stage.classList.add('is-full');
+    root.classList.add('map-full-open');
+    if (stage.requestFullscreen) stage.requestFullscreen().catch(function () {});
+    exitBtn.focus({ preventScroll: true });
+    say('地圖已放大成全螢幕。點區塊可以看內容，按 Esc 或「離開全螢幕」回到原本畫面。');
+  }
+  function leaveFull() {
+    stage.classList.remove('is-full');
+    root.classList.remove('map-full-open');
+  }
+  function exitFull() {
+    if (!isFull()) return;
+    leaveFull();
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function () {});
+    fullBtn.focus({ preventScroll: true });
+  }
+  fullBtn.addEventListener('click', enterFull);
+  exitBtn.addEventListener('click', exitFull);
+  document.addEventListener('fullscreenchange', function () {
+    if (!document.fullscreenElement && isFull()) { leaveFull(); fullBtn.focus({ preventScroll: true }); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isFull() && !viewer.open) exitFull();
+  });
+  // 還沒全螢幕時，滑鼠點地圖先放大；用鍵盤按區塊（detail 為 0）則直接打開內容
+  stage.addEventListener('click', function (e) {
+    if (isFull() || e.detail === 0 || e.target.closest('.exit-full')) return;
+    e.preventDefault();
+    e.stopPropagation();
+    enterFull();
+  }, true);
+
+  /* ---------- 編輯模式（離線檔使用）：在文字版直接修改，存成新的 HTML 檔 ---------- */
+  var editBtn = document.getElementById('edit-toggle');
+  var saveBtn = document.getElementById('edit-save');
+  var editMsg = document.getElementById('edit-msg');
+  var EDITABLE = '#person-name, .meta dd, ul.items > li > p, .items > tbody > tr > td:not(.edit-ui)';
+  var editing = false, dirty = false;
+  var inFrame = false;
+  try { inFrame = window.self !== window.top; } catch (e) { inFrame = true; }
+
+  function escHtml(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  function each(sel, fn, scope) { Array.prototype.forEach.call((scope || document).querySelectorAll(sel), fn); }
+
+  // 重新計算項目數、地圖按鈕的報讀名稱、空白提示和登機證上的名字
+  function refresh() {
+    areas.forEach(function (area) {
+      var n = itemsOf(area).length, num = area.getAttribute('data-n');
+      area.querySelector('.count').textContent = '（共 ' + n + ' 項）';
+      if (byId[area.id]) byId[area.id].btn.setAttribute('aria-label', (num ? num + ' ' : '') + titleOf(area) + '，共 ' + n + ' 項');
+      var panel = parts(area).panel, note = panel.querySelector('.empty-note');
+      if (!n && !note) {
+        note = document.createElement('p');
+        note.className = 'empty-note';
+        note.textContent = '這一區還沒有內容。';
+        panel.insertBefore(note, panel.firstChild);
+      } else if (n && note) note.remove();
+    });
+    var who = document.getElementById('map-for').textContent.trim();
+    var sup = document.getElementById('supported-by').textContent.trim();
+    mapFor.innerHTML = '<span>旅客：</span>' + escHtml(who || '未填寫') + '<br><span>同行：</span>' + escHtml(sup || '未填寫');
+  }
+
+  function makeEditable(el, on) {
+    if (on) { el.setAttribute('contenteditable', 'true'); el.setAttribute('spellcheck', 'false'); }
+    else { el.removeAttribute('contenteditable'); el.removeAttribute('spellcheck'); }
+  }
+  function delButton(text) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'edit-ui del-btn';
+    b.textContent = text;
+    return b;
+  }
+  function decorate(item) {
+    if (item.querySelector('.edit-ui')) return;
+    if (item.tagName === 'TR') {
+      var td = document.createElement('td');
+      td.className = 'edit-ui';
+      td.appendChild(delButton('刪除這一列'));
+      item.appendChild(td);
+    } else item.appendChild(delButton('刪除這一項'));
+  }
+  function addControls() {
+    areas.forEach(function (area) {
+      var panel = parts(area).panel, list = panel.querySelector('.items'), isTable = list.tagName === 'TABLE';
+      Array.prototype.forEach.call(itemsOf(area), decorate);
+      if (isTable) {
+        var th = document.createElement('th');
+        th.className = 'edit-ui';
+        th.scope = 'col';
+        th.innerHTML = '<span class="sr-only">刪除</span>';
+        list.querySelector('thead tr').appendChild(th);
+      }
+      var add = document.createElement('button');
+      add.type = 'button';
+      add.className = 'edit-ui add-btn tool-btn';
+      add.textContent = isTable ? '＋ 新增一列' : '＋ 新增一項';
+      add.setAttribute('aria-label', '在「' + titleOf(area) + '」' + (isTable ? '新增一列' : '新增一項'));
+      add.addEventListener('click', function () { addItem(area); });
+      panel.insertBefore(add, panel.querySelector('.back'));
+    });
+  }
+  function addItem(area, after) {
+    var list = parts(area).panel.querySelector('.items'), item;
+    if (list.tagName === 'TABLE') {
+      item = document.createElement('tr');
+      ['誰', '做什麼', '何時完成'].forEach(function (ph) {
+        var td = document.createElement('td');
+        td.setAttribute('data-placeholder', ph);
+        item.appendChild(td);
+      });
+      list.tBodies[0].appendChild(item);
+    } else {
+      item = document.createElement('li');
+      var p = document.createElement('p');
+      p.setAttribute('data-placeholder', '輸入內容');
+      item.appendChild(p);
+      if (after) after.insertAdjacentElement('afterend', item); else list.appendChild(item);
+    }
+    each('p, td', function (c) { makeEditable(c, true); }, item);
+    decorate(item);
+    dirty = true;
+    refresh();
+    item.querySelector('[contenteditable]').focus();
+    say('已在「' + titleOf(area) + '」新增一項');
+  }
+  function removeEmptyItems(scope) {
+    each('ul.items > li, .items > tbody > tr', function (it) {
+      var clone = it.cloneNode(true);
+      each('.edit-ui', function (el) { el.remove(); }, clone);
+      if (!clone.textContent.trim()) it.remove();
+    }, scope);
+  }
+
+  function setEditing(on) {
+    editing = on;
+    document.body.classList.toggle('editing', on);
+    if (on) {
+      openTab('text');
+      areas.forEach(function (a) { setOpen(a, true); });
+      addControls();
+    } else {
+      each('.edit-ui', function (el) { el.remove(); });
+      removeEmptyItems();
+    }
+    each(EDITABLE, function (el) { makeEditable(el, on); });
+    refresh();
+    editBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    editMsg.textContent = on ? '編輯模式已開啟。內容在「文字版」，受訪者姓名和日期在「訪談資訊」。' : '';
+    say(on ? '已開啟編輯模式，已切到文字版。受訪者姓名和日期在訪談資訊。' : '已關閉編輯模式，地圖已更新。');
+  }
+
+  // 做一份乾淨的檔案：拿掉編輯按鈕、目前的展開狀態和地圖（打開時會重新畫）
+  function cleanCopy() {
+    var doc = root.cloneNode(true);
+    doc.removeAttribute('data-contrast');
+    doc.style.removeProperty('--scale');
+    doc.style.removeProperty('--chrome');
+    doc.classList.remove('map-full-open');
+    if (!doc.className) doc.removeAttribute('class');
+    if (!doc.getAttribute('style')) doc.removeAttribute('style');
+    each('.edit-ui, .back, .empty-note, script[src]', function (el) { el.remove(); }, doc);
+    removeEmptyItems(doc);
+    each('[contenteditable]', function (el) { makeEditable(el, false); }, doc);
+    each('#board, #v-title, #v-body, #v-progress, #v-prev, #v-next, #status, #edit-msg, .count', function (el) { el.innerHTML = ''; }, doc);
+    each('.area', function (el) { el.removeAttribute('style'); }, doc);
+    each('.area-btn', function (el) { el.setAttribute('aria-expanded', 'true'); }, doc);
+    each('.panel', function (el) { el.removeAttribute('hidden'); }, doc);
+    each('.tab-btn[aria-controls]', function (el) { el.setAttribute('aria-expanded', 'false'); }, doc);
+    each('.tab-panel', function (el) { el.setAttribute('hidden', ''); }, doc);
+    each('.map-stage', function (el) { el.classList.remove('is-full'); }, doc);
+    each('[data-scale]', function (el) { el.setAttribute('aria-pressed', el.getAttribute('data-scale') === '1' ? 'true' : 'false'); }, doc);
+    each('#contrast, #edit-toggle', function (el) { el.setAttribute('aria-pressed', 'false'); }, doc);
+    var body = doc.querySelector('body');
+    if (body) { body.classList.remove('editing'); if (!body.className) body.removeAttribute('class'); }
+    var v = doc.querySelector('#viewer');
+    ['open', 'class', 'style'].forEach(function (a) { v.removeAttribute(a); });
+    return '<!doctype html>\n' + doc.outerHTML;
+  }
+  function saveFile() {
+    var d = new Date(), pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var name = (document.getElementById('person-name').textContent.trim() || '受訪者').replace(/[\\\/:*?"<>|\s]/g, '');
+    var a = document.createElement('a');
+    a.download = name + '的MAPS_' + d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + '.html';
+    a.href = URL.createObjectURL(new Blob([cleanCopy()], { type: 'text/html;charset=utf-8' }));
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+    dirty = false;
+    editMsg.textContent = '已存成「' + a.download + '」，在你的「下載」資料夾。之後請打開這個新檔案繼續編輯。';
+    say(editMsg.textContent);
+  }
+
+  if (inFrame) {
+    // 線上預覽版放在別的網頁裡，瀏覽器不允許存檔
+    editBtn.disabled = true;
+    saveBtn.disabled = true;
+    editMsg.textContent = '這是線上預覽版，無法存檔。請打開離線檔案（HTML 檔）來編輯。';
+  } else {
+    editBtn.addEventListener('click', function () { setEditing(!editing); });
+    saveBtn.addEventListener('click', saveFile);
+    document.getElementById('bar-save').addEventListener('click', saveFile);
+    document.getElementById('bar-exit').addEventListener('click', function () { setEditing(false); editBtn.focus(); });
+  }
+
+  document.addEventListener('click', function (e) {
+    var del = e.target.closest && e.target.closest('.del-btn');
+    if (!del) return;
+    var item = del.closest('li, tr'), area = item.closest('.area');
+    item.remove();
+    dirty = true;
+    refresh();
+    parts(area).panel.querySelector('.add-btn').focus();
+    say('已刪除一項，「' + titleOf(area) + '」還有 ' + itemsOf(area).length + ' 項');
+  });
+  document.addEventListener('keydown', function (e) {
+    // 中文輸入法選字時的 Enter 不處理
+    if (!editing || e.key !== 'Enter' || e.isComposing || e.keyCode === 229) return;
+    var el = e.target.closest && e.target.closest('[contenteditable]');
+    if (!el) return;
+    e.preventDefault();
+    var li = el.closest('ul.items > li');
+    if (li) addItem(li.closest('.area'), li);
+  });
+  document.addEventListener('paste', function (e) {
+    var el = editing && e.target.closest && e.target.closest('[contenteditable]');
+    if (!el) return;
+    e.preventDefault();
+    var text = (e.clipboardData || window.clipboardData).getData('text/plain').replace(/\s*\n\s*/g, ' ');
+    document.execCommand('insertText', false, text);
+  });
+  document.addEventListener('input', function () {
+    if (!editing) return;
+    dirty = true;
+    refresh();
+  });
+  window.addEventListener('beforeunload', function (e) {
+    if (!dirty) return;
+    e.preventDefault();
+    e.returnValue = '';
+  });
+  refresh();
+
+  /* ---------- 字級與高對比 ---------- */
+  var scaleBtns = Array.prototype.slice.call(document.querySelectorAll('[data-scale]'));
+  function setScale(v) {
+    root.style.setProperty('--scale', v);
+    measureChrome();
+    scaleBtns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.scale === v ? 'true' : 'false'); });
+    store.set('maps-scale', v);
+  }
+  scaleBtns.forEach(function (b) { b.addEventListener('click', function () { setScale(b.dataset.scale); }); });
+  var savedScale = store.get('maps-scale');
+  if (scaleBtns.some(function (b) { return b.dataset.scale === savedScale; })) setScale(savedScale);
+
+  var contrastBtn = document.getElementById('contrast');
+  function setContrast(on) {
+    if (on) root.setAttribute('data-contrast', 'high');
+    else root.removeAttribute('data-contrast');
+    contrastBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    store.set('maps-contrast', on ? '1' : '0');
+  }
+  contrastBtn.addEventListener('click', function () {
+    setContrast(contrastBtn.getAttribute('aria-pressed') !== 'true');
+  });
+  if (store.get('maps-contrast') === '1') setContrast(true);
+
+  // 連結帶 #story 這類錨點時，直接打開該區
+  var hashIdx = mapped.map(function (a) { return a.id; }).indexOf(location.hash.slice(1));
+  if (hashIdx > -1) openViewer(hashIdx, regionBtns[hashIdx]);
+})();
+</script>
+
+</body>
+</html>
